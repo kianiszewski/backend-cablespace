@@ -1,0 +1,185 @@
+{
+    "users": {
+        "POST /api/auth/register": {
+            "request": {
+                "payload": {
+                    "nombre": "String",
+                    "email": "String",
+                    "contrase\u00f1a": "String",
+                    "rol": "String (usuario/admin)"
+                }
+            },
+            "response": {
+                "id_usuario": "Number",
+                "nombre": "String",
+                "email": "String",
+                "rol": "String"
+            }
+        },
+        "POST /api/auth/login": {
+            "request": {
+                "payload": {
+                    "email": "String",
+                    "contrase\u00f1a": "String"
+                }
+            },
+            "response": {
+                "token": "String",
+                "user": {
+                    "id_usuario": "Number",
+                    "nombre": "String",
+                    "email": "String",
+                    "rol": "String"
+                }
+            }
+        }
+    },
+    "productos": {
+        "GET /api/products": {
+            "response": [
+                {
+                    "id_producto": "Number",
+                    "nombre": "String",
+                    "descripcion": "String",
+                    "precio": "Numeric",
+                    "stock": "Number",
+                    "id_categoria": "Number",
+                    "id_vendedor": "Number"
+                }
+            ]
+        },
+        "POST /api/products": {
+            "request": {
+                "payload": {
+                    "nombre": "String",
+                    "descripcion": "String",
+                    "precio": "Numeric",
+                    "stock": "Number",
+                    "id_categoria": "Number",
+                    "id_vendedor": "Number"
+                }
+            },
+            "response": {
+                "id_producto": "Number",
+                "nombre": "String",
+                "descripcion": "String",
+                "precio": "Numeric",
+                "stock": "Number",
+                "id_categoria": "Number",
+                "id_vendedor": "Number"
+            }
+        }
+    },
+    "pedidos": {
+        "GET /api/orders": {
+            "response": [
+                {
+                    "id_pedido": "Number",
+                    "id_usuario": "Number",
+                    "fecha_pedido": "Timestamp",
+                    "estado": "String"
+                }
+            ]
+        },
+        "POST /api/orders": {
+            "request": {
+                "payload": {
+                    "id_usuario": "Number",
+                    "estado": "String (pendiente, completado, cancelado)"
+                }
+            },
+            "response": {
+                "id_pedido": "Number",
+                "id_usuario": "Number",
+                "fecha_pedido": "Timestamp",
+                "estado": "String"
+            }
+        }
+    },
+    "carrito": {
+        "POST /api/cart": {
+            "request": {
+                "payload": {
+                    "id_usuario": "Number",
+                    "id_producto": "Number",
+                    "cantidad": "Number"
+                }
+            },
+            "response": {
+                "id_carrito": "Number",
+                "id_usuario": "Number",
+                "id_producto": "Number",
+                "cantidad": "Number"
+            }
+        },
+        "DELETE /api/cart/:id": {
+            "request": {
+                "params": {
+                    "id": "Number"
+                }
+            },
+            "response": {
+                "message": "String (Carrito eliminado correctamente)"
+            }
+        }
+    },
+    "favoritos": {
+        "POST /api/favorites": {
+            "request": {
+                "payload": {
+                    "id_usuario": "Number",
+                    "id_producto": "Number"
+                }
+            },
+            "response": {
+                "id_favorito": "Number",
+                "id_usuario": "Number",
+                "id_producto": "Number"
+            }
+        },
+        "DELETE /api/favorites/:id": {
+            "request": {
+                "params": {
+                    "id": "Number"
+                }
+            },
+            "response": {
+                "message": "String (Favorito eliminado correctamente)"
+            }
+        }
+    },
+    "rese\u00f1as": {
+        "POST /api/reviews": {
+            "request": {
+                "payload": {
+                    "id_producto": "Number",
+                    "id_usuario": "Number",
+                    "calificacion": "Number (1-5)",
+                    "comentario": "String"
+                }
+            },
+            "response": {
+                "id_rese\u00f1a": "Number",
+                "id_producto": "Number",
+                "id_usuario": "Number",
+                "calificacion": "Number",
+                "comentario": "String",
+                "fecha_rese\u00f1a": "Timestamp"
+            }
+        }
+    },
+    "notificaciones": {
+        "GET /api/notifications": {
+            "response": [
+                {
+                    "id_notificacion": "Number",
+                    "id_usuario": "Number",
+                    "mensaje": "String",
+                    "fecha_notificacion": "Timestamp",
+                    "leido": "Boolean",
+                    "tipo": "String"
+                }
+            ]
+        }
+    }
+}
