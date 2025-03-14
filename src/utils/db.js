@@ -16,7 +16,10 @@ const pool = isTestEnv
       database: process.env.DB_NAME,
       password: process.env.DB_PASSWORD,
       port: process.env.DB_PORT,
-      ssl: false, // Cambia a true si necesitas conexión segura
+      ssl: {
+          require: true,
+          rejectUnauthorized: false
+      }, // Se activa SSL para Render
     });
 
 if (!isTestEnv) {
