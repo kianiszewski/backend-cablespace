@@ -11,23 +11,15 @@ const isTestEnv = process.env.NODE_ENV === 'test';
 const pool = isTestEnv
   ? null
   : new Pool({
-      user: process.env.DB_USER,
-      host: process.env.DB_HOST,
-      database: process.env.DB_NAME,
-      password: process.env.DB_PASSWORD,
-      port: process.env.DB_PORT,
+      connectionString: process.env.DATABASE_URL,
       ssl: {
           require: true,
           rejectUnauthorized: false
-      }, // Se activa SSL para Render
+      }, // SSL activado para Render
     });
 
 if (!isTestEnv) {
-  console.log('Conectando a la base de datos con los siguientes valores:');
-  console.log('DB_USER:', process.env.DB_USER);
-  console.log('DB_HOST:', process.env.DB_HOST);
-  console.log('DB_NAME:', process.env.DB_NAME);
-  console.log('DB_PORT:', process.env.DB_PORT);
+  console.log('Conectando a la base de datos con la URL de conexión proporcionada.');
 }
 
 // Función para conectar a la base de datos
@@ -38,7 +30,7 @@ const connectDB = async () => {
   }
   try {
     const client = await pool.connect();
-    console.log('✅ Conexión a la base de datos exitosa');
+    console.log('✅ Conexión a la base de datos exitosa en Render');
     client.release();
   } catch (error) {
     console.error('❌ Error conectando a la base de datos:', error.message);
